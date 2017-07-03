@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - "5"
+
+install:
+  - npm install
+
+script:
+  - npm run precommit
+
+after_script:
+
+branches:
+  only:
+    - master
