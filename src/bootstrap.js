@@ -16,10 +16,20 @@ function main() {
     display: 'flex',
     'flex-direction': 'row'
   });
+
   window.Map = new GMap();
-  window.Editor = new GEditor();
-  window.Editor.init();
   Map.setCenter(123, 23, 1);
+
+  const Editor = new GEditor();
+  Editor.init();
+  Editor.setValue('// Ctrl+Enter or Command-Enter to Run');
+  Editor.addCommand(
+    'runCommond',
+    {win: 'Ctrl+Enter', mac: 'Command-Enter'},
+    function (editor) {
+      console.log(editor);
+    }
+  );
 }
 
 document.addEventListener('DOMContentLoaded', main);
