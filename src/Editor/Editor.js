@@ -9,7 +9,6 @@ import * as style from './Editor.scss';
 
 export class GEditor {
   constructor() {
-    $('.container').append('<div id="editor"></div>');
     // document.getElementById('editor').classList.add(style.editor);
     $('#editor').attr('class', style.editor);
     this.editor_ = ace.edit('editor');
