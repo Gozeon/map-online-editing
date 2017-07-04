@@ -1,6 +1,7 @@
 # Map-Online-Editing
 
 [![Build Status](https://travis-ci.org/Gozeon/map-online-editing.svg?branch=master)](https://travis-ci.org/Gozeon/map-online-editing)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/Gozeon/map-online-editing/blob/master/LICENSE)
 
 ## Features
 
