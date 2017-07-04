@@ -5,6 +5,7 @@ import './theme/theme.scss';
 import {GMap} from './Map';
 import {GEditor} from './Editor';
 import $ from 'jquery';
+import * as utils from './utils.js';
 
 /**
  * entrance code for SPA
@@ -16,9 +17,16 @@ function main() {
     display: 'flex',
     'flex-direction': 'row'
   });
+  $('.container').append('<div id="map"></div>');
+  $('.container').append('<div id="content"></div>');
+  $('#content').css({
+    flex: 1,
+    display: 'flex',
+    'flex-direction': 'column'
+  });
+  $('#content').append('<div id="editor"></div>');
 
   window.Map = new GMap();
-  Map.setCenter(123, 23, 1);
 
   const Editor = new GEditor();
   Editor.init();
@@ -27,9 +35,14 @@ function main() {
     'runCommond',
     {win: 'Ctrl+Enter', mac: 'Command-Enter'},
     function (editor) {
-      console.log(editor);
+      $('head').append(`<script>${editor.getValue()}</script>`);
     }
   );
+
+  window.onerror = function(messageOrEvent) {
+    console.log(messageOrEvent);
+    utils.catchError(new Error(messageOrEvent));
+  };
 }
 
 document.addEventListener('DOMContentLoaded', main);
