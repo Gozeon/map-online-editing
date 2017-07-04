@@ -35,13 +35,15 @@ function main() {
     'runCommond',
     {win: 'Ctrl+Enter', mac: 'Command-Enter'},
     function (editor) {
-      $('head').append(`<script>${editor.getValue()}</script>`);
+      $('#scripts').text(`${editor.getValue()}`);
     }
   );
 
   window.onerror = function(messageOrEvent) {
-    console.log(messageOrEvent);
-    utils.catchError(new Error(messageOrEvent));
+    if (messageOrEvent) {
+      utils.catchError(new Error(messageOrEvent));
+      // console.clear();
+    }
   };
 }
 
