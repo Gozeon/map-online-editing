@@ -36,7 +36,7 @@ function main() {
     'runCommond',
     {win: 'Ctrl+Enter', mac: 'Command-Enter'},
     function (editor) {
-      new Loadding().show();
+      Loadding.show();
       if ($('#scripts').get(0)) {
         $('#scripts').remove();
       }
