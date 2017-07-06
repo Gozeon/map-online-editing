@@ -2,17 +2,17 @@ import $ from 'jquery';
 import * as style from './Loadding.scss';
 
 export class Loadding {
-  constructor() {
+
+  static show() {
     $('body').append($('<div id="loadding"><div>')
       .attr('class', style.playground)
       .append($('<div></div>').attr('class', style.spinner)));
-  }
-
-  show() {
     $('div#loadding').css('display', 'flex');
   }
 
-  hide() {
-    $('div#loadding').hide();
+  static hide() {
+    if ($('div#loadding')) {
+      $('div#loadding').hide();
+    }
   }
 }
