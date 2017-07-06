@@ -4,6 +4,7 @@ import './theme/theme.scss';
 // classes you want to use immediately
 import {GMap} from './Map';
 import {GEditor} from './Editor';
+import {Loadding} from './Loadding';
 import $ from 'jquery';
 import * as utils from './utils.js';
 
@@ -35,6 +36,7 @@ function main() {
     'runCommond',
     {win: 'Ctrl+Enter', mac: 'Command-Enter'},
     function (editor) {
+      new Loadding().show();
       if ($('#scripts').get(0)) {
         $('#scripts').remove();
       }
