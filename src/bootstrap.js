@@ -5,7 +5,7 @@ import './theme/theme.scss';
 import {GMap} from './Map';
 import {GEditor} from './Editor';
 import $ from 'jquery';
-// import * as utils from './utils.js';
+import * as utils from './utils.js';
 
 /**
  * entrance code for SPA
@@ -39,15 +39,16 @@ function main() {
         $('#scripts').remove();
       }
       $('head').append(`<script id="scripts">${editor.getValue()}</script>`);
-      // window.onerror = function(messageOrEvent) {
-      //   if (messageOrEvent) {
-      //     utils.catchError(new Error(messageOrEvent));
-      //     // console.clear();
-      //   }
-      //   return false;
-      // };
     }
   );
+
+  window.onerror = function (messageOrEvent) {
+    if (messageOrEvent) {
+      utils.catchError(new Error(messageOrEvent));
+      // console.clear();
+    }
+    return false;
+  };
 
   // document.getElementById('scripts').onerror = function(error) {
   //   console.log(error);
