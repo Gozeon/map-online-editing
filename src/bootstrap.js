@@ -37,12 +37,18 @@ function main() {
     {win: 'Ctrl+Enter', mac: 'Command-Enter'},
     function (editor) {
       Loadding.show();
-      if ($('#scripts').get(0)) {
-        $('#scripts').remove();
-      }
-      $('head').append(`<script id="scripts">${editor.getValue()}</script>`);
+      // location.reload();
+      setTimeout(function () {
+        if ($('#scripts').get(0)) {
+          $('#scripts').remove();
+        }
+        $('head').append(`<script id="scripts">${editor.getValue()}</script>`);
+        Loadding.hide();
+      }, 1800);
     }
   );
+
+  // console.clear();
 
   window.onerror = function (messageOrEvent) {
     if (messageOrEvent) {
