@@ -2,7 +2,7 @@ import mapboxgl from 'mapbox-gl';
 import $ from 'jquery';
 
 import * as style from './Map.scss';
-import * as utils from '../utils.js';
+import CatchError from '../catchError.js';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZHozMTY0MjQiLCJhIjoiNzI3NmNkOTcyNWFlNGQxNzU2OTA1N2EzN2FkNWIwMTcifQ.NS8KWg47FzfLPlKY0JMNiQ';
 
@@ -18,7 +18,8 @@ export class GMap {
   }
 
   setCenter(lng, lat, zoom) {
-    utils.catchError(new Error('error mesg'));
+    CatchError.addError('1');
+    CatchError.addError('2');
     this.map_.setCenter([lng, lat]);
     this.map_.setZoom(zoom);
   }
