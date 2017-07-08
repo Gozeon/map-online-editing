@@ -7,20 +7,22 @@ import $ from 'jquery';
 import {JSHINT} from 'jshint';
 
 import * as style from './Editor.scss';
-// import utils from '../utils.js';
+// import CatchError from '../catchError.js';
 
 export class GEditor {
-  constructor() {
+  constructor(initCode) {
     // document.getElementById('editor').classList.add(style.editor);
     $('#editor').attr('class', style.editor);
     this.editor_ = ace.edit('editor');
+    this.editor_.setValue(initCode);
   }
 
   init() {
     this.editor_.setOptions({
       tabSize: 2,
       enableBasicAutocompletion: true,
-      enableLiveAutocompletion: true
+      enableLiveAutocompletion: true,
+      useWorker: false
     });
     this.editor_.setTheme('ace/theme/xcode');
     this.editor_.getSession().setMode('ace/mode/javascript');
@@ -28,6 +30,7 @@ export class GEditor {
 
   hint() {
     const that_ = this.editor_;
+    const that = this;
     this.editor_.getSession().on('change', function() {
       /* eslint-disable no-undef */
       /* eslint-disable new-cap */
@@ -43,9 +46,22 @@ export class GEditor {
       // console.log(data);
       // utils.catchError('error mesg');
       if (data.hasOwnProperty('errors')) {
-        // console.log(data.errors);
+        const errors = data.errors;
+        const annots = errors.map( error => {
+          return {
+            row: error.line-1,
+            column: error.character,
+            text: `${error.reason}`,
+            type: "error"
+          }
+        });
+        that.setError(annots);
       }
     });
+  }
+
+  setError(annots) {
+    this.editor_.getSession().setAnnotations(annots);
   }
 
   setValue(txt) {
