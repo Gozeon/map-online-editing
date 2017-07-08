@@ -6,7 +6,7 @@ import {GMap} from './Map';
 import {GEditor} from './Editor';
 import {Loadding} from './Loadding';
 import $ from 'jquery';
-import * as utils from './utils.js';
+import CatchError from './catchError.js';
 
 /**
  * entrance code for SPA
@@ -31,41 +31,33 @@ function main() {
 
   const Editor = new GEditor();
   Editor.init();
+  Editor.hint();
   Editor.setValue('// Ctrl+Enter or Command-Enter to Run');
   Editor.addCommand(
     'runCommond',
     {win: 'Ctrl+Enter', mac: 'Command-Enter'},
     function (editor) {
       Loadding.show();
-      // location.reload();
+      CatchError.emptyError();
+      editor.setReadOnly(true);
       setTimeout(function () {
-        if ($('#scripts').get(0)) {
-          $('#scripts').remove();
-        }
         $('head').append(`<script id="scripts">${editor.getValue()}</script>`);
         Loadding.hide();
+        editor.setReadOnly(false);
       }, 1800);
     }
   );
 
-  // console.clear();
-
   window.onerror = function (messageOrEvent) {
     if (messageOrEvent) {
-      utils.catchError(new Error(messageOrEvent));
+      CatchError.addError([messageOrEvent, 'The browser will refresh after 5 seconds']);
       // console.clear();
+      setTimeout(function() {
+        location.reload();
+      }, 5000);
     }
     return false;
   };
-
-  // document.getElementById('scripts').onerror = function(error) {
-  //   console.log(error);
-  //   if (error) {
-  //     utils.catchError(new Error(error));
-  //     // console.clear();
-  //   }
-  //   return false;
-  // };
 }
 
 document.addEventListener('DOMContentLoaded', main);
