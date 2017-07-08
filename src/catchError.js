@@ -22,8 +22,15 @@ function showError(errors) {
 
 export default class CatchError {
   static addError(error) {
-    errors.push(error);
-    showError(errors);
+    if (error instanceof Array) {
+      errors = errors.concat(error);
+      showError(errors);
+    } else if (typeof error === 'string') {
+      errors.push(error);
+      showError(errors);
+    } else {
+      throw new Error('Parameter error');
+    }
   }
 
   static emptyError() {
