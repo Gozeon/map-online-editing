@@ -1,5 +1,6 @@
 // webpack plugins
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const WebpackNotifierPlugin = require('webpack-notifier');
 
 module.exports = {
 
@@ -48,6 +49,9 @@ module.exports = {
   },
 
   plugins: [
+    new WebpackNotifierPlugin({
+      title: 'map-online-editing'
+    }),
     new CommonsChunkPlugin({
       name: ['app', 'vendor'],
       minChunks: Infinity
