@@ -29,14 +29,15 @@ function main() {
 
   window.Map = new GMap();
 
-  const Editor = new GEditor();
+  const Editor = new GEditor('// Ctrl+Enter or Command-Enter to Run');
   Editor.init();
   Editor.hint();
-  Editor.setValue('// Ctrl+Enter or Command-Enter to Run');
+  Editor.setValue(localStorage.getItem('code'));
   Editor.addCommand(
     'runCommond',
     {win: 'Ctrl+Enter', mac: 'Command-Enter'},
     function (editor) {
+      localStorage.setItem('code', editor.getValue());
       Loadding.show();
       CatchError.emptyError();
       editor.setReadOnly(true);
