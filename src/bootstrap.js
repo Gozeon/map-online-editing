@@ -38,14 +38,16 @@ function main() {
     {win: 'Ctrl+Enter', mac: 'Command-Enter'},
     function (editor) {
       localStorage.setItem('code', editor.getValue());
-      Loadding.show();
-      CatchError.emptyError();
-      editor.setReadOnly(true);
-      setTimeout(function () {
-        $('head').append(`<script id="scripts">${editor.getValue()}</script>`);
-        Loadding.hide();
-        editor.setReadOnly(false);
-      }, 1800);
+      if (!$('div.ace_gutter-cell.ace_error').length) {
+        Loadding.show();
+        CatchError.emptyError();
+        editor.setReadOnly(true);
+        setTimeout(function () {
+          $('head').append(`<script id="scripts">${editor.getValue()}</script>`);
+          Loadding.hide();
+          editor.setReadOnly(false);
+        }, 1800);
+      }
     }
   );
 
