@@ -7,7 +7,11 @@
     "build": "NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --color",
     "precommit": "eslint src"
   },
-  "keywords": [],
+  "keywords": [
+    "mapbox-gl",
+    "editor",
+    "map"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
