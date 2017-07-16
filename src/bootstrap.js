@@ -1,66 +1,43 @@
 // global css
 import './theme/theme.scss';
 
-// classes you want to use immediately
-import {GMap} from './Map';
-import {GEditor} from './Editor';
-import {Loadding} from './Loadding';
 import $ from 'jquery';
-import CatchError from './catchError.js';
+import mapboxgl from 'mapbox-gl';
+import * as ace from 'brace';
+import 'brace/theme/xcode.js';
+import 'brace/mode/javascript.js';
+import 'brace/ext/language_tools.js';
+
+import * as style from './main.scss';
+// import CatchError from './catchError.js';
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiZHozMTY0MjQiLCJhIjoiNzI3NmNkOTcyNWFlNGQxNzU2OTA1N2EzN2FkNWIwMTcifQ.NS8KWg47FzfLPlKY0JMNiQ';
 
 /**
  * entrance code for SPA
  */
 function main() {
-  $('.container').css({
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    'flex-direction': 'row'
+  $('div.container').addClass(style.container);
+  $('div.container').append('<div id="map"></div>');
+  $('div.container').append('<div id="editor"></div>');
+  $('div#map').addClass(style.map);
+  $('div#editor').addClass(style.editor);
+  window.map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/light-v9',
+    zoom: 5,
+    center: [-78.880453, 42.897852]
   });
-  $('.container').append('<div id="map"></div>');
-  $('.container').append('<div id="content"></div>');
-  $('#content').css({
-    flex: 1,
-    display: 'flex',
-    'flex-direction': 'column'
+
+  window.editor = ace.edit('editor');
+  window.editor.setOptions({
+    tabSize: 2,
+    enableBasicAutocompletion: true,
+    enableLiveAutocompletion: true
+    // useWorker: false
   });
-  $('#content').append('<div id="editor"></div>');
-
-  window.Map = new GMap();
-
-  const Editor = new GEditor('// Ctrl+Enter or Command-Enter to Run');
-  Editor.init();
-  Editor.hint();
-  Editor.setValue(localStorage.getItem('code'));
-  Editor.addCommand(
-    'runCommond',
-    {win: 'Ctrl+Enter', mac: 'Command-Enter'},
-    function (editor) {
-      localStorage.setItem('code', editor.getValue());
-      if (!$('div.ace_gutter-cell.ace_error').length) {
-        Loadding.show();
-        CatchError.emptyError();
-        editor.setReadOnly(true);
-        setTimeout(function () {
-          $('head').append(`<script id="scripts">${editor.getValue()}</script>`);
-          Loadding.hide();
-          editor.setReadOnly(false);
-        }, 1800);
-      }
-    }
-  );
-
-  window.onerror = function (messageOrEvent) {
-    if (messageOrEvent) {
-      CatchError.addError([messageOrEvent, 'The browser will refresh after 5 seconds']);
-      // console.clear();
-      setTimeout(function() {
-        location.reload();
-      }, 5000);
-    }
-    return false;
-  };
+  window.editor.setTheme('ace/theme/xcode');
+  window.editor.getSession().setMode('ace/mode/javascript');
 }
 
 document.addEventListener('DOMContentLoaded', main);
