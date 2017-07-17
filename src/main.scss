@@ -9,5 +9,21 @@
   cursor: pointer;
 }
 .editor {
+  flex: 3;
+}
+.top {
   flex: 1;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.console {
+  flex: 1;
+  background: #272822;
+  color: #aaa;
+  padding: 3px 8px;
+  overflow: auto;
+  li {
+    margin: 3px 0;
+    border-bottom: .3px solid rgba(170, 170, 170, .3);
+  }
 }
