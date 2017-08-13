@@ -3,6 +3,7 @@ import './theme/theme.scss';
 
 import $ from 'jquery';
 import mapboxgl from 'mapbox-gl';
+import '../node_modules/mapbox-gl/dist/mapbox-gl.css';
 import * as ace from 'brace';
 import 'brace/theme/monokai.js';
 import 'brace/mode/javascript.js';

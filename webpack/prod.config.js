@@ -33,7 +33,7 @@ module.exports = webpackMerge(webpackCommon, {
 
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.css|\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
