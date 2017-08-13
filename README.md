@@ -1,6 +1,6 @@
 # Map-Online-Editing
 
-[![Build Status](https://travis-ci.org/Gozeon/map-online-editing.svg?branch=master)](https://travis-ci.org/Gozeon/map-online-editing)
+[![Build Status](https://travis-ci.org/gozeon/map-online-editing.svg?branch=master)](https://travis-ci.org/gozeon/map-online-editing)
 
 ## Installation
 
