@@ -100,16 +100,9 @@ module.exports = webpackMerge(webpackCommon, {
     }),
     new ExtractTextPlugin('[name]-[chunkhash].min.css'),
     new UglifyJsPlugin({
-      compressor: {
-        screw_ie8: true,
-        warnings: false
-      },
-      mangle: {
-        screw_ie8: true
-      },
-      output: {
-        comments: false,
-        screw_ie8: true
+      compress: {
+        warnings: false,
+        comparisons: false,
       },
       sourceMap: true
     }),
