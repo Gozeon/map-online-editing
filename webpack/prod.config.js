@@ -33,7 +33,7 @@ module.exports = webpackMerge(webpackCommon, {
 
     rules: [
       {
-        test: /\.css|\.scss$/,
+        test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
@@ -44,7 +44,7 @@ module.exports = webpackMerge(webpackCommon, {
                 minimize: true,
                 sourceMap: true,
                 importLoaders: 2,
-                localIdentName: '[name]__[local]'
+                // localIdentName: '[name]__[local]'
               }
             },
             {
@@ -66,6 +66,10 @@ module.exports = webpackMerge(webpackCommon, {
             }
           ]
         })
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
 

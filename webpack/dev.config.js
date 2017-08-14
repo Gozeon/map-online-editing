@@ -31,7 +31,7 @@ module.exports = webpackMerge(webpackCommon, {
 
     rules: [
       {
-        test: /\.css|\.scss$/,
+        test: /\.scss$/,
         use: [
           {
             loader: 'style-loader'
@@ -53,6 +53,10 @@ module.exports = webpackMerge(webpackCommon, {
             }
           }
         ]
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
 
